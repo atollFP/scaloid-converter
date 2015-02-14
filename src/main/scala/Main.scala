@@ -5,7 +5,6 @@ import ammonite.all._
 object Main extends App {
 
   def replace(f:Path) = write.over(f, RegexReplacer(read(f)))
-//  def editRec(f:File) = ()
 
   val wd = processWorkingDir/up/"sc"
   val (source, dest) = (wd/args(0), wd/args(1))
