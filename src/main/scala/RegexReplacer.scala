@@ -11,15 +11,27 @@ object RegexReplacer {
 
 
   def apply(input: String) =  {
+
     var inp = input
 
-    val is = imports.findFirstIn(inp).toList.lastOption
-    def addM(m:Match) =
-      is.map(_ + "import org.scaloid.common._")
+    var b = true    
+    //add a string at the end of the match if it's the first block of imports
+    //We don't want to mess with inner imports
+    def addM(m:Match) = {
+      if (b) {
+        b = false
+        Some(m.toString + "import org.scaloid.common._")
+      } else
+        None     
+    }
+
+    //replace imports based on addM which only add the import to the first import block
     inp = imports.replaceSomeIn(inp, addM)
 
-    inp = toSActivity.replaceAllIn(inp, "extends SActivity")
+    //replace Activity by SActivity
+    inp = toSActivity.replaceFirstIn(inp, "extends SActivity")
 
+    //"shorten" the methods onlyif their name fit
     def shM(m:Match) = {
       m.group(1) match {
         case "onCreate" | "onResume" => Some("  def " +m.group(1) + " ")
