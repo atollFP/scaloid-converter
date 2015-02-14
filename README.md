@@ -10,11 +10,11 @@ This project aim to convert automatically an android scala project to [Scaloid](
 
 ```
 git clone https://github.com/atollFP/scaloid-converter.git
- cd scaloid/converter
- mkdir ../sc
- cp -r /<YOUR_PROJECT>/ ../sc/<X>
- sbt
- \> run <X> <Y>
+cd scaloid/converter
+mkdir ../sc
+cp -r /<YOUR_PROJECT>/ ../sc/<X>
+sbt
+> run <X> <Y>
 ```
 
 y is destroyed and regenerated each time.
